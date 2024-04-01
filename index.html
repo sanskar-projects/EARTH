@@ -69,12 +69,17 @@ alert(_data.msg);
 display();
 return;
 }
+if(!_data)
+{
+alert("CONNECTION FAILED");
+display();
+return;
+}
 data={};
 data=Object.assign({},data,_data);
 }
 catch(e)
 {alert("CONNECTION FAILED");}
-alert(!data.url);
 
 display();
 }
