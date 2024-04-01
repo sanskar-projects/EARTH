@@ -47,6 +47,7 @@ var date;
 var lon;
 var lat;
 var dim;
+var data;
 
 const fetchData=async()=>
 {
@@ -61,21 +62,24 @@ date=document.getElementById("date").value;
 dim=document.getElementById("dim").value;
 const url="https://api.nasa.gov/planetary/earth/assets?lon="+lon+"&lat="+lat+"&date="+date+"&dim="+dim+"&api_key=";
 const response=await fetch(`${url}${api_key}`);
-const data=await response.json();
-if(data.msg)
+const _data=await response.json();
+if(_data.msg)
 {
-alert(data.msg);
-location.reload();
+alert(_data.msg);
+display();
 return;
 }
-display(data);
+data={};
+data=Object.assign({},data,_data);
+display();
 }
 catch(e)
 {
 alert("CONNECTION FAILED");
+display();
 }
 }
-function display(data)
+function display()
 {
 document.getElementById("imageLINK").href=data.url;
 document.getElementById("image").src=data.url;
